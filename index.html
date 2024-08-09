@@ -44,11 +44,16 @@
             cursor: pointer;
             color: white;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            margin-right: 10px;
         }
 
         button:hover {
             background-color: #2980b9;
+        }
+
+        .button-group {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -58,7 +63,12 @@
     <h1>Traduction SGA ↔ Français</h1>
     
     <textarea id="inputText" placeholder="Entrez du texte en SGA ou en français..."></textarea>
-    <button onclick="translateText()">Traduire</button>
+    
+    <div class="button-group">
+        <button onclick="translateText()">Traduire</button>
+        <button onclick="copyText()">Copier</button>
+    </div>
+    
     <textarea id="outputText" readonly placeholder="La traduction apparaîtra ici..."></textarea>
 </div>
 
@@ -97,6 +107,13 @@
         }
 
         document.getElementById('outputText').value = output;
+    }
+
+    function copyText() {
+        const outputText = document.getElementById('outputText');
+        outputText.select();
+        document.execCommand('copy');
+        alert("Texte copié dans le presse-papiers !");
     }
 </script>
 
