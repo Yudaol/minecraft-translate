@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traduction SGA ↔ Français</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Traduction SGA ↔ Français</h1>
+    
+    <textarea id="inputText" placeholder="Entrez du texte en SGA ou en français..."></textarea>
+    <button onclick="translateText()">Traduire</button>
+    <textarea id="outputText" readonly placeholder="La traduction apparaîtra ici..."></textarea>
+</div>
+
+<script>
+    const sgaToFrancais = {
+        'ᔑ': 'a', 'ʖ': 'b', 'ᓵ': 'c', '↸': 'd', 'ᒷ': 'e', '⎓': 'f', '⊣': 'g', '⍑': 'h',
+        '╎': 'i', '⋮': 'j', 'ꖌ': 'k', 'ꖎ': 'l', 'ᒲ': 'm', 'リ': 'n', '𝙹': 'o', '!': 'p',
+        '¡': 'q', 'ᑑ': 'r', '∷': 's', 'ᓭ': 't', 'ℸ': 'u', '⚍': 'v', '⍊': 'w', '∴': 'x',
+        'ᑵ': 'y', '⎛': 'z', ' ': ' '
+    };
+
+    const francaisToSga = {
+        'a': 'ᔑ', 'b': 'ʖ', 'c': 'ᓵ', 'd': '↸', 'e': 'ᒷ', 'f': '⎓', 'g': '⊣', 'h': '⍑',
+        'i': '╎', 'j': '⋮', 'k': 'ꖌ', 'l': 'ꖎ', 'm': 'ᒲ', 'n': 'リ', 'o': '𝙹', 'p': '!',
+        'q': '¡', 'r': 'ᑑ', 's': '∷', 't': 'ᓭ', 'u': 'ℸ', 'v': '⚍', 'w': '⍊', 'x': '∴',
+        'y': 'ᑵ', 'z': '⎛', ' ': ' '
+    };
+
+    function translateText() {
+        const input = document.getElementById('inputText').value;
+        let output = '';
+
+        // Détecter si l'entrée est en SGA ou en français
+        const isSGA = /^[ᔑʖᓵ↸ᒷ⎓⊣⍑╎⋮ꖌꖎᒲリ𝙹!¡ᑑ∷ᓭℸ⚍⍊∴ᑵ⎛ ]+$/i.test(input);
+
+        if (isSGA) {
+            // Traduire de SGA à français
+            for (let char of input) {
+                output += sgaToFrancais[char] || char;
+            }
+        } else {
+            // Traduire de français à SGA
+            for (let char of input.toLowerCase()) {
+                output += francaisToSga[char] || char;
+            }
+        }
+
+        document.getElementById('outputText').value = output;
+    }
+</script>
+
+</body>
+</html>
